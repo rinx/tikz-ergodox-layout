@@ -1,11 +1,168 @@
+\RequirePackage{luatex85}
 \documentclass[tikz]{standalone}
 \usepackage{fontspec}
 \usetikzlibrary{positioning,shapes,fit,calc}
 
 \usepackage{calc}
 
+% reference
+% http://nixeneko.hatenablog.com/entry/2017/01/06/202312
+
+\tikzset{
+    pics/vhsplit/.style n args = {4}{
+        code = {
+        \node[anchor=west] (A) at (-3mm,-0.5mm) {#1};
+        \node[anchor=west] (B) at (-3mm,-6.5mm) {#2};
+        \node[anchor=east] (C) at (9mm,-0.5mm) {#3};
+        \node[anchor=east] (D) at (9mm,-6.5mm) {#4};
+        \draw[rounded corners=1mm] (-3mm,-9.5mm) rectangle (9mm,2.5mm); 
+        }
+    }
+}
+\tikzset{
+    pics/longvhsplit/.style n args = {4}{
+        code = {
+        \node[anchor=west] (A) at (-3mm,-0.5mm) {#1};
+        \node[anchor=west] (B) at (-3mm,-6.5mm) {#2};
+        \node[anchor=east] (C) at (9mm,-0.5mm) {#3};
+        \node[anchor=east] (D) at (9mm,-6.5mm) {#4};
+        \draw[rounded corners=1mm] (-9mm,-9.5mm) rectangle (9mm,2.5mm); 
+        }
+    }
+}
+\tikzset{
+    pics/vlongvhsplit/.style n args = {4}{
+        code = {
+        \node[anchor=west] (A) at (-3mm,-0.5mm) {#1};
+        \node[anchor=west] (B) at (-3mm,-6.5mm) {#2};
+        \node[anchor=east] (C) at (9mm,-0.5mm) {#3};
+        \node[anchor=east] (D) at (9mm,-6.5mm) {#4};
+        \draw[rounded corners=1mm] (-3mm,-9.5mm) rectangle (9mm,8.5mm); 
+        }
+    }
+}
+\tikzset{
+    pics/doublevhsplit/.style n args = {4}{
+        code = {
+        \node[anchor=west] (A) at (-3mm,-0.5mm) {#1};
+        \node[anchor=west] (B) at (-3mm,-6.5mm) {#2};
+        \node[anchor=east] (C) at (9mm,-0.5mm) {#3};
+        \node[anchor=east] (D) at (9mm,-6.5mm) {#4};
+        \draw[rounded corners=1mm] (-3mm,-12.5mm) rectangle (9mm,11.5mm); 
+        }
+    }
+}
+
+\makeatletter
+
+\newlength{\ergodox@keylength}
+\setlength{\ergodox@keylength}{13mm}
+\newlength{\ergodox@longkeylength}
+\setlength{\ergodox@longkeylength}{\ergodox@keylength * \real{1.5}}
+\newlength{\ergodox@doublekeylength}
+\setlength{\ergodox@doublekeylength}{\ergodox@keylength * \real{2.0}}
+
+\def\ergodox@keypath#1#2#3#4#5#6#7#8#9{%
+  \path pic (#1) at ([xshift=#8\ergodox@keylength,yshift=#9\ergodox@keylength]#2\ergodox@keylength,#7\ergodox@keylength)
+  {vhsplit={#3}{#4}{#5}{#6}};
+}
+\def\ergodox@longkeypath#1#2#3#4#5#6#7#8#9{%
+  \path pic (#1) at ([xshift=#8\ergodox@keylength,yshift=#9\ergodox@keylength]#2\ergodox@keylength,#7\ergodox@keylength)
+  {longvhsplit={#3}{#4}{#5}{#6}};
+}
+\def\ergodox@vlongkeypath#1#2#3#4#5#6#7#8#9{%
+  \path pic (#1) at ([xshift=#8\ergodox@keylength,yshift=#9\ergodox@keylength]#2\ergodox@keylength,#7\ergodox@keylength)
+  {vlongvhsplit={#3}{#4}{#5}{#6}};
+}
+\def\ergodox@doublekeypath#1#2#3#4#5#6#7#8#9{%
+  \path pic (#1) at ([xshift=#8\ergodox@keylength,yshift=#9\ergodox@keylength]#2\ergodox@keylength,#7\ergodox@keylength)
+  {doublevhsplit={#3}{#4}{#5}{#6}};
+}
+
+% \keyassign{}
+\def\keyassign#1{
+    \newcount\ergodox@keycount
+    \begin{tikzpicture}
+        \@for\lp@elem:=#1\do{
+            \ifnum\ergodox@keycount<7
+                \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
+                \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter a\ergodox@cnum}}
+                \def\ergodox@lineindex{0}
+            \else
+                \ifnum\ergodox@keycount<14
+                    \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                    \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
+                    \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter b\ergodox@cnum}}
+                    \def\ergodox@lineindex{-1}
+                \else
+                    \ifnum\ergodox@keycount<20
+                        \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                        \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
+                        \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter c\ergodox@cnum}}
+                        \def\ergodox@lineindex{-2}
+                    \else
+                        \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                        \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
+                        \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter d\ergodox@cnum}}
+                        \def\ergodox@lineindex{-3}
+                    \fi
+                \fi
+            \fi
+            \ifnum
+                \ifnum\ergodox@keycount=0 1\else
+                \ifnum\ergodox@keycount=7 1\else
+                \ifnum\ergodox@keycount=14 1\else
+                \ifnum\ergodox@keycount=20 1\else
+                \ifnum\ergodox@keycount=44 1\else
+                \ifnum\ergodox@keycount=51 1\else
+                \ifnum\ergodox@keycount=57 1\else
+                \ifnum\ergodox@keycount=64 1\else
+                0 \fi\fi\fi\fi\fi\fi\fi\fi=1 % horizontal long
+                \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\ergodox@longkeypath\expandafter\expandafter\expandafter\ergodox@keyname\expandafter\ergodox@keyindex\lp@elem\ergodox@lineindex{0}{0}
+            \else
+                \ifnum
+                    \ifnum\ergodox@keycount=13 1\else
+                    \ifnum\ergodox@keycount=26 1\else
+                    \ifnum\ergodox@keycount=45 1\else
+                    \ifnum\ergodox@keycount=58 1\else
+                    0 \fi\fi\fi\fi=1 % vertical long
+                    \ifnum\ergodox@lineindex=-1
+                        \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\ergodox@vlongkeypath\expandafter\expandafter\expandafter\ergodox@keyname\expandafter\ergodox@keyindex\lp@elem\ergodox@lineindex{0}{-0.5}
+                    \else
+                        \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\ergodox@vlongkeypath\expandafter\expandafter\expandafter\ergodox@keyname\expandafter\ergodox@keyindex\lp@elem\ergodox@lineindex{0}{0}
+                    \fi
+                \else
+                    \ifnum
+                        \ifnum\ergodox@keycount=35 1\else
+                        \ifnum\ergodox@keycount=36 1\else
+                        \ifnum\ergodox@keycount=75 1\else
+                        \ifnum\ergodox@keycount=76 1\else
+                        0 \fi\fi\fi\fi=1 % double
+                        \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\ergodox@doublekeypath\expandafter\expandafter\expandafter\ergodox@keyname\expandafter\ergodox@keyindex\lp@elem\ergodox@lineindex{0}{0}
+                    \else
+                        \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\ergodox@keypath\expandafter\expandafter\expandafter\ergodox@keyname\expandafter\ergodox@keyindex\lp@elem\ergodox@lineindex{0}{0}
+                    \fi
+                \fi
+            \fi
+
+            \advance\ergodox@keycount by 1
+        }
+    \end{tikzpicture}
+}
+
+
+
+\makeatother
+
 \begin{document}
 
+\keyassign{
+    {}{}{\char"07E}{\char"060},{}{}!1,{}{}@2,{}{}\#3,{}{}\$4,{}{}\%5,{}{}{}{Enter},
+    {}{}{}{Tab},{}{}{}Q,{}{}{}W,{}{}{}E,{}{}{}R,{}{}{}T,{}{}\{[,
+    {}{}{}{CTRL},{}{}{}A,{}{}{}S,{}{}{}D,{}{}{}F,{}{}{}G,
+    {}{}{}{Shift},{}{}{}Z,{}{}{}X,{}{}{}C,{}{}{}V,{}{}{}B,{}{}\}]
+}
 
 \end{document}
 
