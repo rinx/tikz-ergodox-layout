@@ -82,29 +82,41 @@
 % \keyassign{}
 \def\keyassign#1{
     \newcount\ergodox@keycount
+    \newcount\ergodox@tempkeycount
     \begin{tikzpicture}
         \@for\lp@elem:=#1\do{
             \ifnum\ergodox@keycount<7
-                \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                \ergodox@tempkeycount=\ergodox@keycount
+                \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                 \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
                 \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter a\ergodox@cnum}}
+                \typeout{\ergodox@keyname, \ergodox@cnum}
                 \def\ergodox@lineindex{0}
             \else
                 \ifnum\ergodox@keycount<14
-                    \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                    \ergodox@tempkeycount=\ergodox@keycount
+                    \advance \ergodox@tempkeycount by -7
+                    \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                     \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
                     \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter b\ergodox@cnum}}
+                    \typeout{\ergodox@keyname, \ergodox@cnum}
                     \def\ergodox@lineindex{-1}
                 \else
                     \ifnum\ergodox@keycount<20
-                        \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                        \ergodox@tempkeycount=\ergodox@keycount
+                        \advance \ergodox@tempkeycount by -14
+                        \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                         \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
                         \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter c\ergodox@cnum}}
+                        \typeout{\ergodox@keyname, \ergodox@cnum}
                         \def\ergodox@lineindex{-2}
                     \else
-                        \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@keycount}
+                        \ergodox@tempkeycount=\ergodox@keycount
+                        \advance \ergodox@tempkeycount by -20
+                        \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                         \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
                         \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter d\ergodox@cnum}}
+                        \typeout{\ergodox@keyname, \ergodox@cnum}
                         \def\ergodox@lineindex{-3}
                     \fi
                 \fi
