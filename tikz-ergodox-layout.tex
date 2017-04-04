@@ -156,13 +156,23 @@
                                             \typeout{\ergodox@keyname, \ergodox@cnum}
                                             \def\ergodox@lineindex{-7}
                                         \else
-                                            \ergodox@tempkeycount=\ergodox@keycount
-                                            \advance \ergodox@tempkeycount by -30
-                                            \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
-                                            \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
-                                            \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter e\ergodox@cnum}}
-                                            \typeout{\ergodox@keyname, \ergodox@cnum}
-                                            \def\ergodox@lineindex{0}
+                                            \ifnum\ergodox@keycount<44
+                                                \ergodox@tempkeycount=\ergodox@keycount
+                                                \advance \ergodox@tempkeycount by -30
+                                                \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
+                                                \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
+                                                \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter e\ergodox@cnum}}
+                                                \typeout{\ergodox@keyname, \ergodox@cnum}
+                                                \def\ergodox@lineindex{0}
+                                            \else
+                                                \ergodox@tempkeycount=\ergodox@keycount
+                                                \advance \ergodox@tempkeycount by -36
+                                                \expandafter\def\expandafter\ergodox@cnum\expandafter{\expandafter{\the\ergodox@tempkeycount}
+                                                \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
+                                                \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter{\expandafter f\ergodox@cnum}}
+                                                \typeout{\ergodox@keyname, \ergodox@cnum}
+                                                \def\ergodox@lineindex{1}
+                                            \fi
                                         \fi
                                     \fi
                                 \fi
@@ -228,7 +238,8 @@
     {}{}{}{Tab},{}{}{}{L3},
     {}{}{}{CTRL},
     {}{}{}{Space},{}{}{}{BS},{}{}{}{Cmd},
-    {}{}{}{BS},{}{}\&6,{}{}{}7,{}{}{}8,{}{}{}9,{}{}{}0,{}{}=-
+    {}{}{}{BS},{}{}\&6,{}{}{}7,{}{}{}8,{}{}{}9,{}{}{}0,{}{}_-,
+    {}{}=+,{}{}{}Y,{}{}{}U,{}{}{}I,{}{}{}O,{}{}{}P,{}{}|$\backslash$
 }
 
 \end{document}
