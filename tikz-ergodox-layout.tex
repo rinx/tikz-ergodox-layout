@@ -79,7 +79,6 @@
   {doublevhsplit={#3}{#4}{#5}{#6}};
 }
 
-% \keyassign{}
 \def\keyassign#1{
     \newcount\ergodox@keycount
     \newcount\ergodox@tempkeycount
@@ -125,7 +124,7 @@
                                 \advance \ergodox@tempkeycount by -27
                                 \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                                 \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
-                                \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter d\ergodox@cnum}}
+                                \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter e\ergodox@cnum}}
                                 \typeout{\ergodox@keyname, \ergodox@cnum}
                                 \def\ergodox@lineindex{-4}
                             \else
@@ -134,7 +133,7 @@
                                     \advance \ergodox@tempkeycount by -27
                                     \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                                     \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
-                                    \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter d\ergodox@cnum}}
+                                    \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter f\ergodox@cnum}}
                                     \typeout{\ergodox@keyname, \ergodox@cnum}
                                     \def\ergodox@lineindex{-5}
                                 \else
@@ -143,7 +142,7 @@
                                         \advance \ergodox@tempkeycount by -28
                                         \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                                         \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
-                                        \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter d\ergodox@cnum}}
+                                        \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter g\ergodox@cnum}}
                                         \typeout{\ergodox@keyname, \ergodox@cnum}
                                         \def\ergodox@lineindex{-6}
                                     \else
@@ -152,7 +151,7 @@
                                             \advance \ergodox@tempkeycount by -31
                                             \expandafter\def\expandafter\ergodox@cnum\expandafter{\the\ergodox@tempkeycount}
                                             \expandafter\def\expandafter\ergodox@keyindex\expandafter{\expandafter{\ergodox@cnum}}
-                                            \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter d\ergodox@cnum}}
+                                            \expandafter\def\expandafter\ergodox@keyname\expandafter{\expandafter{\expandafter g\ergodox@cnum}}
                                             \typeout{\ergodox@keyname, \ergodox@cnum}
                                             \def\ergodox@lineindex{-7}
                                         \else
@@ -238,7 +237,7 @@
     {}{}{}{Tab},{}{}{}{L3},
     {}{}{}{CTRL},
     {}{}{}{Space},{}{}{}{BS},{}{}{}{Cmd},
-    {}{}{}{BS},{}{}\&6,{}{}{}7,{}{}{}8,{}{}{}9,{}{}{}0,{}{}_-,
+    {}{}{}{BS},{}{}\^6,{}{}\&7,{}{}*8,{}{}(9,{}{})0,{}{}\_-,
     {}{}=+,{}{}{}Y,{}{}{}U,{}{}{}I,{}{}{}O,{}{}{}P,{}{}|$\backslash$
 }
 
