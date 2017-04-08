@@ -82,6 +82,7 @@
 \def\keyassign#1{
     \newcount\ergodox@keycount
     \newcount\ergodox@tempkeycount
+    \def\ergodox@longkeyoffset{0.0}
     \begin{tikzpicture}
         \@for\lp@elem:=#1\do{
             \ifnum\ergodox@keycount<7
@@ -155,6 +156,7 @@
                                             \typeout{\ergodox@keyname, \ergodox@cnum}
                                             \def\ergodox@lineindex{-7}
                                         \else
+                                            \def\ergodox@longkeyoffset{0.5}
                                             \ifnum\ergodox@keycount<45
                                                 \ergodox@tempkeycount=\ergodox@keycount
                                                 \advance \ergodox@tempkeycount by -30
@@ -210,7 +212,7 @@
                 \ifnum\ergodox@keycount=57 1\else
                 \ifnum\ergodox@keycount=64 1\else
                 0 \fi\fi\fi\fi\fi\fi\fi\fi=1 % horizontal long
-                \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\ergodox@longkeypath\expandafter\expandafter\expandafter\ergodox@keyname\expandafter\ergodox@keyindex\lp@elem\ergodox@lineindex{0}{0}
+                \expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\expandafter\ergodox@longkeypath\expandafter\expandafter\expandafter\ergodox@keyname\expandafter\ergodox@keyindex\lp@elem\ergodox@lineindex{\ergodox@longkeyoffset}{0}
             \else
                 \ifnum
                     \ifnum\ergodox@keycount=13 1\else
